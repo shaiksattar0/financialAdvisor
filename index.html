@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthWise Financial Advisors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init('mthtanjim@gmail.com'); // Replace with your ID
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-indigo-700 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">FinancialAdvisor</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-indigo-200">Home</a>
+                <a href="#services" class="hover:text-indigo-200">Services</a>
+                <a href="#calculators" class="hover:text-indigo-200">Calculators</a>
+                <a href="#contact" class="hover:text-indigo-200">Consultation</a>
+            </div>
+            <button class="md:hidden text-xl">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center text-white relative">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="text-center z-10 px-4 slide-up">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Smart Financial Planning</h1>
+            <p class="text-xl md:text-2xl mb-8">Grow your wealth with expert advice</p>
+            <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg text-lg font-semibold transition">Free Consultation</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-left">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md slide-up">
+                    <div class="text-indigo-600 text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold mb-2">Investment Planning</h3>
+                    <p class="text-gray-600">Tailored strategies for long-term growth.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md slide-up" style="animation-delay: 0.2s;">
+                    <div class="text-indigo-600 text-4xl mb-4">🏠</div>
+                    <h3 class="text-xl font-bold mb-2">Mortgage Advice</h3>
+                    <p class="text-gray-600">Get the best home loan rates.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md slide-up" style="animation-delay: 0.4s;">
+                    <div class="text-indigo-600 text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold mb-2">Retirement Planning</h3>
+                    <p class="text-gray-600">Secure your future today.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-left">Financial Calculators</h2>
+            
+            <!-- Loan Calculator -->
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-12 slide-up">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-700">Loan Calculator</h3>
+                <form id="loanForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Loan Amount ($)</label>
+                        <input type="number" id="loanAmount" class="w-full p-3 border border-gray-300 rounded-lg" value="10000">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Interest Rate (%)</label>
+                        <input type="number" id="interestRate" class="w-full p-3 border border-gray-300 rounded-lg" value="5">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Loan Term (Years)</label>
+                        <input type="number" id="loanTerm" class="w-full p-3 border border-gray-300 rounded-lg" value="5">
+                    </div>
+                    <button type="button" onclick="calculateLoan()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg font-semibold transition">Calculate</button>
+                </form>
+                <div id="loanResult" class="mt-6 space-y-2 hidden">
+                    <p>Monthly Payment: <span id="monthlyPayment" class="font-bold text-indigo-700">$0</span></p>
+                    <p>Total Payment: <span id="totalPayment" class="font-bold text-indigo-700">$0</span></p>
+                    <p>Total Interest: <span id="totalInterest" class="font-bold text-indigo-700">$0</span></p>
+                </div>
+            </div>
+
+            <!-- Interest Calculator -->
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg slide-up" style="animation-delay: 0.2s;">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-700">Compound Interest Calculator</h3>
+                <form id="interestForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Principal Amount ($)</label>
+                        <input type="number" id="principal" class="w-full p-3 border border-gray-300 rounded-lg" value="5000">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Annual Rate (%)</label>
+                        <input type="number" id="annualRate" class="w-full p-3 border border-gray-300 rounded-lg" value="5">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Years</label>
+                        <input type="number" id="years" class="w-full p-3 border border-gray-300 rounded-lg" value="10">
+                    </div>
+                    <button type="button" onclick="calculateInterest()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg font-semibold transition">Calculate</button>
+                </form>
+                <div id="interestResult" class="mt-6 hidden">
+                    <p>Future Value: <span id="futureValue" class="font-bold text-indigo-700">$0</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Form -->
+    <section id="contact" class="py-16 bg-indigo-700 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-left">Book a Free Consultation</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-gray-800 slide-up">
+                <form id="consultationForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Phone</label>
+                        <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Preferred Date</label>
+                        <input type="date" id="date" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg font-semibold transition">Book Now</button>
+                </form>
+                <div id="consultSuccess" class="mt-4 text-green-600 text-center hidden">Booking confirmed! We'll contact you shortly.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 WealthWise Financial Advisors. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="scripts/calculator.js"></script>
+    <script src="scripts/form.js"></script>
+    <script src="scripts/animations.js"></script>
+</body>
+</html>
